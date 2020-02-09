@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Courses"
+        android:id="@+id/nav_courses" />
+
+    <item android:title="Homework"
+        android:id="@+id/nav_homework" />
+</menu>
