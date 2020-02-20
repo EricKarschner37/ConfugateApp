@@ -32,6 +32,18 @@ class MainActivityViewModel(application: Application): AndroidViewModel(applicat
         }
     }
 
+    fun removeCourse(course: Course){
+        viewModelScope.launch {
+            homeworkRepository.delete(course)
+        }
+    }
+
+    fun removeHomework(homework: Homework){
+        viewModelScope.launch{
+            homeworkRepository.delete(homework)
+        }
+    }
+
     fun startAddHomework(){
         EventController.setEvent(EventController.Event.START_ADD_HOMEWORK)
     }

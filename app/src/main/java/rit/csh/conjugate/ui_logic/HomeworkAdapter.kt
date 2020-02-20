@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.homework_item.view.*
 import rit.csh.conjugate.R
 import rit.csh.conjugate.data.Homework
 
-class HomeworkAdapter(private val homeworks: List<Homework>, context: Context): RecyclerView.Adapter<HomeworkAdapter.ViewHolder>() {
+class HomeworkAdapter(private val homeworks: List<Homework>, context: Context, private val deleteHomework: (Homework) -> Unit): RecyclerView.Adapter<HomeworkAdapter.ViewHolder>() {
 
     private val inflater = LayoutInflater.from(context)
 
@@ -21,9 +21,11 @@ class HomeworkAdapter(private val homeworks: List<Homework>, context: Context): 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.titleView.text = homeworks[position].name
+        holder.deleteButton.setOnClickListener { deleteHomework(homeworks[position]) }
     }
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         val titleView = itemView.homework_title_view
+        val deleteButton = itemView.homework_delete_btn
     }
 }

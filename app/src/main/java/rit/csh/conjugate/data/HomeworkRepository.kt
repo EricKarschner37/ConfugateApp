@@ -15,6 +15,14 @@ class HomeworkRepository(private val homeworkDao: HomeworkDao) {
         homeworkDao.insert(course)
     }
 
+    suspend fun delete(course: Course){
+        homeworkDao.delete(course)
+    }
+
+    suspend fun delete(homework: Homework){
+        homeworkDao.delete(homework)
+    }
+
     suspend fun deleteCourses(){
         homeworkDao.deleteCourses()
     }

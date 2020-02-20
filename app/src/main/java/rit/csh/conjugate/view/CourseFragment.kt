@@ -10,8 +10,9 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.add_course_layout.view.*
+import kotlinx.android.synthetic.main.add_item_layout.view.*
 import kotlinx.android.synthetic.main.fragment_course.*
+import org.jetbrains.anko.cancelButton
 import org.jetbrains.anko.okButton
 import org.jetbrains.anko.support.v4.alert
 
@@ -38,11 +39,10 @@ class CourseFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        Log.i(TAG, "view created")
 
         course_rv.layoutManager = LinearLayoutManager(requireContext())
-        course_rv.adapter =
-            CourseAdapter(listOf(), requireContext())
+        course_rv.adapter = CourseAdapter(listOf(), requireContext())
+
         viewModel.coursesWithHomeworks.observe(viewLifecycleOwner, Observer { coursesWithHomeworks ->
             setCourses(coursesWithHomeworks.map { it.course })
         })
@@ -55,18 +55,20 @@ class CourseFragment : Fragment() {
     }
 
     private fun setCourses(courses: List<Course>){
-        Log.i(TAG, courses.toString())
+        Log.i(TAG, "courses: ${courses}")
         (course_rv.adapter as CourseAdapter).setCourses(courses)
     }
 
     private fun addCourseAlert(){
         alert("Add course"){
-            val view = layoutInflater.inflate(R.layout.add_course_layout, null)
+            val view = layoutInflater.inflate(R.layout.add_item_layout, null)
+            view.item_name_et.hint = "Course name"
             customView = view
             okButton {
-                val course = Course(0, listOf(), "location", view.course_name_et.text.toString())
+                val course = Course((Math.random() * 1000).toLong(), listOf(), "location", view.item_name_et.text.toString())
                 addCourse(course)
             }
+            cancelButton {  }
         }.show()
     }
 

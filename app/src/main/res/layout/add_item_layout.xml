@@ -6,7 +6,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/course_name_et"
-        android:hint="Course name" />
+        android:id="@+id/item_name_et"
+        android:hint="Item name" />
 
 </LinearLayout>

@@ -45,6 +45,20 @@ class MainActivity : AppCompatActivity() {
         toggle.isDrawerIndicatorEnabled = true
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
+
+        nav_view.setNavigationItemSelectedListener { item ->
+            drawer_layout.closeDrawers()
+            when (item.itemId){
+                R.id.nav_homework -> showHomework()
+                R.id.nav_courses -> showCourses()
+            }
+            true
+        }
+
+        supportFragmentManager.beginTransaction()
+            .add(R.id.fragment_container,
+                homeworkFragment)
+            .commit()
     }
 
     private fun handleEvent(e: EventController.Event){
